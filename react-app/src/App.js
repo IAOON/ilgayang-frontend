@@ -1,37 +1,56 @@
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const BACKEND_URL = 'https://heroku-deploy-test-gcuad.run.goorm.io/judge';
+import today_problem from './problems/20220515.json';
 
-async function APICall() {
-    // when react first renders then it called componentDidMount()
-    const response = await axios.post(BACKEND_URL, { id: 1, answer: 'test' });
-    console.log(response.data);
+const BACKEND_URL = 'https://';
+
+async function APICall(data) {
+    console.log(data);
 }
 
-async function Submit(event) {
-    event.preventDefault();
-
-    const response = await axios.post(BACKEND_URL, { id: 1, answer: 'test2' });
-
-    // alert(`제출한 답 : ${answer}`);
-
-    if (response.data.result == true) {
-        alert('정답입니다!');
-    } else {
-        alert('잘못된 답입니다.');
-    }
+function Problem({ title, body, author }) {
+  return (
+      <li>
+          <p>문제 타이틀 : {title}</p>
+          <p>문제 내용 : {body}</p>
+          <p>문제 만든 사람 : {author}</p>
+      </li>
+  );
 }
 
 function App() {
+    const [TodayProblem, setTodayProblem] = useState({});
     const [answer, setAnswer] = useState('');
 
+    useEffect(() => {
+      setTodayProblem({
+        title: today_problem.title,
+        body: today_problem.body,
+        author: today_problem.author,
+      })
+      console.log("rendering~");
+    }, []);
+
     const handleChange = ({ target: { value } }) => setAnswer(value);
+    
+    const checkAnswer= (event) => {
+        event.preventDefault();
+    
+        console.log(answer);
+        console.log(today_problem.answer);
+        
+        if (answer == today_problem.answer){
+            alert('맞았습니다!'); 
+        }else{
+            alert('틀렸습니다!');
+        }
+    }
 
     const handleSubmit = (event) => {
-        event.preventDefault();
+        event.preventDefault();        
         axios({
             method: 'post',
             url: BACKEND_URL,
@@ -48,13 +67,14 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                <button onClick={APICall}>Axios Test</button>
-
-                <form onSubmit={handleSubmit}>
-                    <input name="answer" value={answer} onChange={handleChange} />
-                    <button type="submit">제출</button>
-                </form>
+            <header className="App-header">            
+            <div className="Problem">
+                <Problem title={TodayProblem.title} body={TodayProblem.body} author={TodayProblem.author}/>
+            </div>
+            <div className="submit">
+                <input type="text" id="test" onChange={(e) => {setAnswer(e.target.value)}}/>
+                <button onClick={checkAnswer}>제출하기</button>
+            </div>
             </header>
         </div>
     );
