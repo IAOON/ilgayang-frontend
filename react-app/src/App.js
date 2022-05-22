@@ -3,79 +3,108 @@ import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-import today_problem from './problems/20220515.json';
-
-const BACKEND_URL = 'https://';
+const BACKEND_URL = 'https://ilgayang-backend.herokuapp.com/problems/';
 
 async function APICall(data) {
     console.log(data);
 }
 
 function Problem({ title, body, author }) {
-  return (
-      <li>
-          <p>문제 타이틀 : {title}</p>
-          <p>문제 내용 : {body}</p>
-          <p>문제 만든 사람 : {author}</p>
-      </li>
-  );
+    return (
+        <lr>
+            <p><b>{title}</b></p>
+            <p>Asked by {author}</p>
+            <br></br>
+            <p>{body}</p>
+        </lr>
+    );
+}
+
+function getTodayString(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year + month + day;
 }
 
 function App() {
     const [TodayProblem, setTodayProblem] = useState({});
     const [answer, setAnswer] = useState('');
+    const [isloading, setisloading] = useState(true);
 
     useEffect(() => {
-      setTodayProblem({
-        title: today_problem.title,
-        body: today_problem.body,
-        author: today_problem.author,
-      })
-      console.log("rendering~");
+        async function fetchAndSetProblem() {
+            URL = BACKEND_URL + getTodayString();
+            const result = await axios.get(URL);
+            setTodayProblem({
+                title: result.data.title,
+                body: result.data.body,
+                author: result.data.author,
+                answer: result.data.answer,
+            })
+            setAnswer(result.data.answer);
+            setisloading(false);
+        }
+        fetchAndSetProblem();
     }, []);
+    // useEffect(() => {
+    // setTodayProblem({
+    //   title: today_problem.title,
+    //   body: today_problem.body,
+    //   author: today_problem.author,
+    // })
+    // console.log("rendering~");
+    // }, []);
 
     const handleChange = ({ target: { value } }) => setAnswer(value);
-    
-    const checkAnswer= (event) => {
+
+    const checkAnswer = (event) => {
         event.preventDefault();
-    
-        console.log(answer);
-        console.log(today_problem.answer);
-        
-        if (answer == today_problem.answer){
-            alert('맞았습니다!'); 
-        }else{
+
+        if (answer == TodayProblem.answer) {
+            alert('맞았습니다!');
+        } else {
             alert('틀렸습니다!');
         }
-    }
+    };
 
     const handleSubmit = (event) => {
-        event.preventDefault();        
+        event.preventDefault();
         axios({
             method: 'post',
             url: BACKEND_URL,
             data: { id: 1, answer: answer },
         }).then((res) => {
-            console.log(res.data);
             if (res.data.result == true) {
-                alert("맞았습니다!")
-            }else{
-                alert("틀렸습니다!")
+                alert('맞았습니다!');
+            } else {
+                alert('틀렸습니다!');
             }
         });
     };
 
     return (
         <div className="App">
-            <header className="App-header">            
+            <header className="App-Header"></header>
             <div className="Problem">
-                <Problem title={TodayProblem.title} body={TodayProblem.body} author={TodayProblem.author}/>
+                <Problem
+                    title={TodayProblem.title}
+                    body={TodayProblem.body}
+                    author={TodayProblem.author}
+                />
             </div>
             <div className="submit">
-                <input type="text" id="test" onChange={(e) => {setAnswer(e.target.value)}}/>
+                <input
+                    type="text"
+                    id="test"
+                    onChange={(e) => {
+                        setAnswer(e.target.value);
+                    }}
+                />
                 <button onClick={checkAnswer}>제출하기</button>
             </div>
-            </header>
         </div>
     );
 }
