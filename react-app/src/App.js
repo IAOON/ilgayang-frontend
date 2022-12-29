@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const BACKEND_URL = 'https://ilgayang-backend.herokuapp.com/problems/';
+const BACKEND_URL = 'https://cloudflare-worker-d1.zetbouaka9758.workers.dev/api/problem';
 
 async function APICall(data) {
     console.log(data);
@@ -36,15 +36,16 @@ function App() {
 
     useEffect(() => {
         async function fetchAndSetProblem() {
-            URL = BACKEND_URL + getTodayString();
+            URL = BACKEND_URL + "/" + getTodayString();
             const result = await axios.get(URL);
+            console.log(result.data[0]);
             setTodayProblem({
-                title: result.data.title,
-                body: result.data.body,
-                author: result.data.author,
-                answer: result.data.answer,
+                title: result.data[0].title,
+                body: result.data[0].body,
+                author: result.data[0].author,
+                answer: result.data[0].answer,
             })
-            setAnswer(result.data.answer);
+            setAnswer(result[0].data.answer);
             setisloading(false);
         }
         fetchAndSetProblem();
