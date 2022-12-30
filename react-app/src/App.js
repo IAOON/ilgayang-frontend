@@ -58,12 +58,13 @@ function App() {
 
     const checkAnswer = (event) => {
         event.preventDefault();
-
         if (answer == TodayProblem.answer) {
             alert('맞았습니다!');
         } else {
             alert('틀렸습니다!');
         }
+        console.log(answer);
+        console.log(TodayProblem.answer);
     };
 
     const handleSubmit = (event) => {
@@ -77,7 +78,7 @@ function App() {
                 alert('맞았습니다!');
             } else {
                 alert('틀렸습니다!');
-            }
+            }            
         });
     };
 
@@ -90,8 +91,9 @@ function App() {
     />
     <form>
       <div className="mb-4">
-        <input className="w-full px-4 py-2 rounded-lg shadow-sm text-gray-700 focus:outline-none focus:shadow-outline" type="text" placeholder="Your answer here" />
-      </div>      
+        <input className="w-full px-4 py-2 rounded-lg shadow-sm text-gray-700 focus:outline-none focus:shadow-outline" type="text" placeholder="Your answer here" 
+        onChange={(e) => { setAnswer(e.target.value); }}/>      
+        </div>      
         <button className="w-full px-4 py-2 font-bold text-white bg-gray-800 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline" onClick={checkAnswer}>제출하기</button>       
     </form>
   </div>
