@@ -10,13 +10,8 @@ async function APICall(data) {
 }
 
 function Problem({ title, body, author }) {
-    return (
-        <lr>
-            <p><b>{title}</b></p>
-            <p>Asked by {author}</p>
-            <br></br>
-            <p>{body}</p>
-        </lr>
+    return (        
+        <p className="text-lg mb-4">{body}</p>        
     );
 }
 
@@ -87,26 +82,19 @@ function App() {
     };
 
     return (
-        <div className="App">
-            <header className="App-Header"></header>
-            <div className="Problem">
-                <Problem
-                    title={TodayProblem.title}
-                    body={TodayProblem.body}
-                    author={TodayProblem.author}
-                />
-            </div>
-            <div className="submit">
-                <input
-                    type="text"
-                    id="test"
-                    onChange={(e) => {
-                        setAnswer(e.target.value);
-                    }}
-                />
-                <button onClick={checkAnswer}>제출하기</button>
-            </div>
-        </div>
+        <div className="bg-white shadow-lg rounded-lg p-6">
+    <h2 className="text-2xl font-bold mb-4">{TodayProblem.title}</h2>
+    <Problem                   
+        body={TodayProblem.body}
+        author={TodayProblem.author}
+    />
+    <form>
+      <div className="mb-4">
+        <input className="w-full px-4 py-2 rounded-lg shadow-sm text-gray-700 focus:outline-none focus:shadow-outline" type="text" placeholder="Your answer here" />
+      </div>      
+        <button className="w-full px-4 py-2 font-bold text-white bg-gray-800 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline" onClick={checkAnswer}>제출하기</button>       
+    </form>
+  </div>
     );
 }
 
