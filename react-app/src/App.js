@@ -5,10 +5,6 @@ import { useEffect, useState } from 'react';
 
 const BACKEND_URL = 'https://cloudflare-worker-d1.zetbouaka9758.workers.dev/api/problem';
 
-async function APICall(data) {
-    console.log(data);
-}
-
 function Problem({ title, body, author }) {
     return (        
         <p className="text-lg mb-4">{body}</p>        
@@ -33,7 +29,6 @@ function App() {
         async function fetchAndSetProblem() {
             URL = BACKEND_URL + "/" + getTodayString();
             const result = await axios.get(URL);
-            console.log(result.data[0]);
             setTodayProblem({
                 title: result.data[0].title,
                 body: result.data[0].body,
@@ -63,8 +58,6 @@ function App() {
         } else {
             alert('틀렸습니다!');
         }
-        console.log(answer);
-        console.log(TodayProblem.answer);
     };
 
     const handleSubmit = (event) => {
