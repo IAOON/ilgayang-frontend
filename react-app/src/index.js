@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const Header = () => (
-
   <header className="flex items-center justify-between px-4 py-3 bg-gray-900 text-white">
     <div className="font-bold text-xl">매일매일 미궁게임</div>
     <nav>
@@ -34,8 +33,12 @@ const Riddle = () => (
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>    
+root.render(        
+  <React.StrictMode>
+    <meta property="og:title" content="Daily Maze" />
+    <meta property="og:description" content="매일 매일 퍼즐 하나를 풀어봅시다!" />
+    <meta property="og:image" content="https://www.example.com/image.jpg" />
+    <meta property="og:url" content="https://maze.can-u-solve.today/" />
     <div className="bg-gray-200">
       <Header />
       <main className="max-w-sm mx-auto mt-10">
