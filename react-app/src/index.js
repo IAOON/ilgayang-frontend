@@ -26,7 +26,7 @@ const Header = () => (
 
 const Footer = () => (
   <footer className="px-4 py-3 bg-gray-900 text-white mt-10">
-    <div className="text-sm font-medium leading-none text-center">&copy; 2020 Browser-Based Online Riddles</div>
+    <div className="text-sm font-medium leading-none text-center">&copy; 2023 Browser-Based Online Riddles</div>
   </footer>
 );
 
