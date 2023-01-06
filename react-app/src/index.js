@@ -7,11 +7,11 @@ import reportWebVitals from './reportWebVitals';
 
 const Opengraph = () => (
     <div>
-      <Helmet>
+        <helmet>
         <title>매일매일 미궁게임</title>
         <meta property="og:title" content="매일매일 미궁게임" />
-        <meta property="og:description" content="매일매일 퍼즐 하나를 해결하자!" />        
-      </Helmet>
+        <meta property="og:description" content="매일매일 퍼즐 하나를 해결하자!" />
+        </helmet>
     </div>
 );
 
@@ -44,6 +44,7 @@ const Footer = () => (
 // );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(        
   <React.StrictMode>
     <Opengraph />
