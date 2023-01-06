@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -39,17 +38,7 @@ function App() {
             setisloading(false);
         }
         fetchAndSetProblem();
-    }, []);
-    // useEffect(() => {
-    // setTodayProblem({
-    //   title: today_problem.title,
-    //   body: today_problem.body,
-    //   author: today_problem.author,
-    // })
-    // console.log("rendering~");
-    // }, []);
-
-    const handleChange = ({ target: { value } }) => setAnswer(value);
+    }, []);    
 
     const checkAnswer = (event) => {
         event.preventDefault();
@@ -59,22 +48,7 @@ function App() {
             alert('틀렸습니다!');
         }
     };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        axios({
-            method: 'post',
-            url: BACKEND_URL,
-            data: { id: 1, answer: answer },
-        }).then((res) => {
-            if (res.data.result == true) {
-                alert('맞았습니다!');
-            } else {
-                alert('틀렸습니다!');
-            }            
-        });
-    };
-
+    
     return (
         <div className="bg-white shadow-lg rounded-lg p-6">
     <h2 className="text-2xl font-bold mb-4">{TodayProblem.title}</h2>
@@ -85,7 +59,7 @@ function App() {
     <form>
       <div className="mb-4">
         <input className="w-full px-4 py-2 rounded-lg shadow-sm text-gray-700 focus:outline-none focus:shadow-outline" type="text" placeholder="Your answer here" 
-        onChange={(e) => { setAnswer(e.target.value); }}/>      
+            onChange={(e) => { setAnswer(e.target.value); }}/>      
         </div>      
         <button className="w-full px-4 py-2 font-bold text-white bg-gray-800 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline" onClick={checkAnswer}>제출하기</button>       
     </form>
