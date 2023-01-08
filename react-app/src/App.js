@@ -7,8 +7,14 @@ const BACKEND_URL = 'https://cloudflare-worker-d1.zetbouaka9758.workers.dev/api/
 const State = {
   "문제로딩중": 0,
   "문제푸는중": 1,
-  "정답맞춤": 2,
+  "힌트1봤음": 2,
+  "힌트2봤음": 3  
 };
+
+const verifiedState = {
+    "정답못맞춤": 0,
+    "정답맞춤": 1
+}
 
 function Problem({ title, body, author }) {
     return (        
@@ -30,6 +36,8 @@ function App() {
     const [answer, setAnswer] = useState('');
     const [isloading, setisloading] = useState(true);
     const [userState, setuserState] = useState(State.문제로딩중);
+    const [verified, setverified] = useState(verifiedState.정답못맞춤);
+    
     useEffect(() => {
         async function fetchAndSetProblem() {
             URL = BACKEND_URL + "/" + getTodayString();
@@ -39,18 +47,38 @@ function App() {
                 body: result.data[0].body,
                 author: result.data[0].author,
                 answer: result.data[0].answer,
+                hint1: result.data[0].hint1,
+                hint2: result.data[0].hint2
             })
-            setAnswer(result[0].data.answer);
-            setuserState(State.문제푸는중);
+            // setAnswer();
+            setuserState(State.문제푸는중);       
         }
         fetchAndSetProblem();
     }, []);    
-
+    
+    const viewHint1 = (event) => {
+        event.preventDefault();
+        if (userState == State.문제푸는중){        
+            alert('힌트 1 : ' + TodayProblem.hint1);
+            setuserState(State.힌트1봤음);         
+        }
+    }
+    
+    const viewHint2 = (event) => {
+        event.preventDefault();
+        if (userState == State.힌트1봤음){        
+            alert('힌트 2 : ' + TodayProblem.hint2);
+            setuserState(State.힌트2봤음);         
+        } else {
+            alert('로딩중이거나 힌트 1 안봤음');
+        }
+    }
+    
     const checkAnswer = (event) => {
         event.preventDefault();
         if (answer == TodayProblem.answer) {
             alert('맞았습니다!');
-            setuserState(State.정답맞춤);            
+            setverified(verifiedState.정답맞춤);
         } else {
             alert('틀렸습니다!');
         }
@@ -58,11 +86,22 @@ function App() {
     
     const TwitterShare = (event) => {
         const url = encodeURI('https://maze.can-u-solve.today/');
-        const text = encodeURI('오늘의 문제는 너무 쉬웠어. 너희도 한번 풀어봐!');
-        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+        if (userState == State.힌트1봤음) {
+            const text = encodeURI('오늘의 문제는 그럭저럭 쉬웠어. 너희도 한번 풀어봐!');  
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+        } 
+        else{
+            if (userState == State.힌트2봤음) {
+                const text = encodeURI('오늘의 문제는 졸라 어려웠어. 너희도 한번 풀어봐!');
+                window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+            } else {
+                const text = encodeURI('오늘의 문제는 아주 쉬웠어. 너희도 한번 풀어봐!');    
+                window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+            }
+        }        
     };
     
-    if (userState == State.정답맞춤){
+    if (verified === verifiedState.정답맞춤){
         return (
             <div className="bg-white shadow-lg rounded-lg p-6">    
                 <h2 className="text-2xl font-bold mb-4">넌 정답을 맞췄다</h2>
@@ -91,7 +130,12 @@ function App() {
             <input className="w-full px-4 py-2 rounded-lg shadow-sm text-gray-700 focus:outline-none focus:shadow-outline" type="text" placeholder="Your answer here" 
                 onChange={(e) => { setAnswer(e.target.value); }}/>      
             </div>      
-            <button className="w-full px-4 py-2 font-bold text-white bg-gray-800 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline" onClick={checkAnswer}>제출하기</button>       
+            <div className="flex justify-between">
+              <button className="w-1/2 px-4 py-2 font-bold text-white bg-blue-800 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline mr-2" onClick={viewHint1}>Hint 1</button>
+              <button className="w-1/2 px-4 py-2 font-bold text-white bg-blue-800 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline ml-2" onClick={viewHint2}>Hint 2</button>
+            </div>
+            <br></br>
+            <button className="w-full px-4 py-2 font-bold text-white bg-gray-800 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline" onClick={checkAnswer}>제출하기</button>                   
         </form>
       </div>
         );

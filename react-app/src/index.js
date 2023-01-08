@@ -6,18 +6,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const Opengraph = () => (
-    <div>
-        <helmet>
-        <title>매일매일 미궁게임</title>
-        <meta property="og:title" content="매일매일 미궁게임" />
-        <meta property="og:description" content="매일매일 퍼즐 하나를 해결하자!" />
-        </helmet>
+    <div>        
+        <title>일일미궁 - 매일매일 미궁게임</title>
+        <meta property="og:title" content="일일미궁 - 매일매일 미궁게임" />
+        <meta property="og:description" content="매일매일 퀴즈 하나를 해결하자!" />        
     </div>
 );
 
 const Header = () => (
   <header className="flex items-center justify-between px-4 py-3 bg-gray-900 text-white">
-    <div className="font-bold text-xl">매일매일 미궁게임</div>
+    <div className="font-bold text-xl">일일미궁 - 매일매일 미궁 게임</div>
     <nav>
       <a className="inline-block px-3 py-2 font-medium leading-none text-white hover:text-gray-300" href="#">Home</a>
     </nav>
