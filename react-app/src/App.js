@@ -2,6 +2,8 @@ import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
+import ReactGA from "react-ga4";
+
 const BACKEND_URL = 'https://cloudflare-worker-d1.zetbouaka9758.workers.dev/api/problem';
 
 const State = {
@@ -51,7 +53,11 @@ function App() {
                 hint2: result.data[0].hint2
             })
             // setAnswer();
-            setuserState(State.문제푸는중);       
+            setuserState(State.문제푸는중);
+            ReactGA.event({
+              category: "Maze",
+              action: "See the problem",              
+            });
         }
         fetchAndSetProblem();
     }, []);    
@@ -59,7 +65,11 @@ function App() {
     const viewHint1 = (event) => {
         event.preventDefault();
         alert('힌트 1 : ' + TodayProblem.hint1);
-        setuserState(State.힌트1봤음);        
+        setuserState(State.힌트1봤음);
+        ReactGA.event({
+            category: "Maze",
+            action: "See Hint1",              
+        });
     }
     
     const viewHint2 = (event) => {
@@ -67,6 +77,10 @@ function App() {
         if (userState == State.힌트1봤음 || userState == State.힌트2봤음){        
             alert('힌트 2 : ' + TodayProblem.hint2);
             setuserState(State.힌트2봤음);         
+            ReactGA.event({
+                category: "Maze",
+                action: "See Hint2",
+            });
         } else {
             alert('힌트 1을 보고오세요');
         }
@@ -77,6 +91,10 @@ function App() {
         if (answer == TodayProblem.answer) {
             alert('맞았습니다!');
             setverified(verifiedState.정답맞춤);
+            ReactGA.event({
+                category: "Maze",
+                action: "Success!",
+            });
         } else {
             alert('틀렸습니다!');
         }

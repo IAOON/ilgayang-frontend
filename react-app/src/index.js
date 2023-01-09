@@ -5,6 +5,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import ReactGA from 'react-ga4';
+
+ReactGA.initialize("G-3FQ4ETDJR6");
+
 const Opengraph = () => (
     <div>        
         <title>일일미궁 - 매일매일 미궁게임</title>
