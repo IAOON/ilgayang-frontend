@@ -58,10 +58,8 @@ function App() {
     
     const viewHint1 = (event) => {
         event.preventDefault();
-        if (userState == State.문제푸는중){        
-            alert('힌트 1 : ' + TodayProblem.hint1);
-            setuserState(State.힌트1봤음);         
-        }
+        alert('힌트 1 : ' + TodayProblem.hint1);
+        setuserState(State.힌트1봤음);        
     }
     
     const viewHint2 = (event) => {
@@ -70,7 +68,7 @@ function App() {
             alert('힌트 2 : ' + TodayProblem.hint2);
             setuserState(State.힌트2봤음);         
         } else {
-            alert('로딩중이거나 힌트 1 안봤음');
+            alert('힌트 1을 보고오세요');
         }
     }
     
