@@ -64,7 +64,7 @@ function App() {
     
     const viewHint2 = (event) => {
         event.preventDefault();
-        if (userState == State.힌트1봤음 || useState == State.힌트2봤음){        
+        if (userState == State.힌트1봤음 || userState == State.힌트2봤음){        
             alert('힌트 2 : ' + TodayProblem.hint2);
             setuserState(State.힌트2봤음);         
         } else {
