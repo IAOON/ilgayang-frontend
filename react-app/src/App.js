@@ -18,10 +18,21 @@ const verifiedState = {
     "정답맞춤": 1
 }
 
-function Problem({ title, body, author }) {
-    return (        
-        <p className="text-lg mb-4">{body}</p>        
-    );
+function Problem({ title, body, author, image }) {
+    if (image === "")
+        return (
+            <div>
+                <p className="text-lg mb-4">{body}</p>            
+            </div>
+        );
+    else
+        return (
+            <div>
+                <p className="text-lg mb-4">{body}</p>            
+                <img src="/girl.png"></img>
+                <b><center>축하드립니다!</center></b>
+            </div>
+        );
 }
 
 function getTodayString(){
@@ -124,6 +135,7 @@ function App() {
                 <Problem                   
                     body="자랑해도 된다"
                     author={TodayProblem.author}
+                    image="girl.png"
                 />
                 <form>
                   <div className="mb-4">
@@ -140,6 +152,7 @@ function App() {
         <Problem                   
             body={TodayProblem.body}
             author={TodayProblem.author}
+            image=""
         />
         <form>
           <div className="mb-4">
