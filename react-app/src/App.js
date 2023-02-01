@@ -112,7 +112,7 @@ function App() {
     };
     
     const TwitterShare = (event) => {
-        const url = encodeURI('https://maze.akaioon.dev/');
+        const url = encodeURI('https://maze.akaiaoon.dev/');
         if (userState == State.힌트1봤음) {
             const text = encodeURI('오늘의 문제는 그럭저럭 쉬웠어. 너희도 한번 풀어봐!');  
             window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
