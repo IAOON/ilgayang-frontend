@@ -112,7 +112,7 @@ function App() {
     };
     
     const TwitterShare = (event) => {
-        const url = encodeURI('https://maze.can-u-solve.today/');
+        const url = encodeURI('https://maze.akaioon.dev/');
         if (userState == State.힌트1봤음) {
             const text = encodeURI('오늘의 문제는 그럭저럭 쉬웠어. 너희도 한번 풀어봐!');  
             window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
@@ -127,7 +127,14 @@ function App() {
             }
         }        
     };
-    
+    if (userState == State.문제로딩중){
+        return (
+            <div className="bg-white shadow-lg rounded-lg p-6">    
+                <h2 className="text-xl font-bold mb-4">로딩중입니다...</h2>
+                잠시만 기다려주세요.
+            </div>
+        )
+    }
     if (verified === verifiedState.정답맞춤){
         return (
             <div className="bg-white shadow-lg rounded-lg p-6">    
