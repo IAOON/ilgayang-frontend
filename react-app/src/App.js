@@ -115,15 +115,15 @@ function App() {
         const url = encodeURI('https://maze.akaiaoon.dev/');
         if (userState == State.힌트1봤음) {
             const text = encodeURI('#일일미궁 오늘의 문제는 그럭저럭 쉬웠어. 너도 한번 풀어봐!');  
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=일일미궁`);
         } 
         else{
             if (userState == State.힌트2봤음) {
                 const text = encodeURI('#일일미궁 오늘의 문제는 졸라 어려웠어. 너도 한번 풀어봐!');
-                window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+                window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=일일미궁`);
             } else {
                 const text = encodeURI('#일일미궁 오늘의 문제는 아주 쉬웠어. 너도 한번 풀어봐!');
-                window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+                window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=일일미궁`);
             }
         }        
     };

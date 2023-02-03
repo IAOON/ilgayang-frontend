@@ -36,19 +36,6 @@ const Footer = () => (
   </footer>
 );
 
-// const Riddle = () => (
-//   <div className="bg-white shadow-lg rounded-lg p-6">
-//     <h2 className="text-2xl font-bold mb-4">Riddle of the Day</h2>
-//     <p className="text-lg mb-4">I'm light as a feather, but even the world's strongest man couldn't hold me for much longer than a minute. What am I?</p>
-//     <form>
-//       <div className="mb-4">
-//         <input className="w-full px-4 py-2 rounded-lg shadow-sm text-gray-700 focus:outline-none focus:shadow-outline" type="text" placeholder="Your answer here" />
-//       </div>
-//       <button className="w-full px-4 py-2 font-bold text-white bg-gray-800 rounded-lg shadow-sm hover:bg-gray-700 focus:outline-none focus:shadow-outline" type="submit">Submit</button>
-//     </form>
-//   </div>
-// );
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(        
