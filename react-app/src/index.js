@@ -31,6 +31,7 @@ const Footer = () => (
     <div className="text-sm font-medium leading-none text-center">
         <p>&copy; 2023 Browser-Based Online Riddles</p>
         문의: <a href="https://twitter.com/akastwit">트위터 @akastwit</a></div>
+        <p>정답을 맞추시면 트위터에 공유하기 버튼이 생깁니다!</p>
   </footer>
 );
 

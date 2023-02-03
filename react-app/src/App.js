@@ -114,15 +114,15 @@ function App() {
     const TwitterShare = (event) => {
         const url = encodeURI('https://maze.akaiaoon.dev/');
         if (userState == State.힌트1봤음) {
-            const text = encodeURI('오늘의 문제는 그럭저럭 쉬웠어. 너희도 한번 풀어봐!');  
+            const text = encodeURI('#일일미궁 오늘의 문제는 그럭저럭 쉬웠어. 너도 한번 풀어봐!');  
             window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
         } 
         else{
             if (userState == State.힌트2봤음) {
-                const text = encodeURI('오늘의 문제는 졸라 어려웠어. 너희도 한번 풀어봐!');
+                const text = encodeURI('#일일미궁 오늘의 문제는 졸라 어려웠어. 너도 한번 풀어봐!');
                 window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
             } else {
-                const text = encodeURI('오늘의 문제는 아주 쉬웠어. 너희도 한번 풀어봐!');    
+                const text = encodeURI('#일일미궁 오늘의 문제는 아주 쉬웠어. 너도 한번 풀어봐!');
                 window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
             }
         }        
@@ -140,7 +140,7 @@ function App() {
             <div className="bg-white shadow-lg rounded-lg p-6">    
                 <h2 className="text-2xl font-bold mb-4">넌 정답을 맞췄다</h2>
                 <Problem                   
-                    body="자랑해도 된다"
+                    body="자랑해도 됩니다."
                     author={TodayProblem.author}
                     image="girl.png"
                 />
