@@ -148,7 +148,7 @@ function App() {
                   <div className="mb-4">
                   </div>
                   <button className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:shadow-outline" 
-                   onClick={TwitterShare}>트위터에서 자랑하기</button>
+                   onClick={TwitterShare}>트위터에 공유</button>
                 </form>
               </div>
          );
