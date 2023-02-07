@@ -19,10 +19,11 @@ const verifiedState = {
 }
 
 function Problem({ title, body, author, image }) {
-    if (image === "")
+    if (image != "girl.png")
         return (
             <div>
-                <p className="text-lg mb-4">{body}</p>            
+                <img src="{image}"></img>
+                <p className="text-lg mb-4">{body}</p>                
             </div>
         );
     else
@@ -61,7 +62,8 @@ function App() {
                 author: result.data[0].author,
                 answer: result.data[0].answer,
                 hint1: result.data[0].hint1,
-                hint2: result.data[0].hint2
+                hint2: result.data[0].hint2,
+                image_url: result.data[0].image
             })
             // setAnswer();
             setuserState(State.문제푸는중);
@@ -160,7 +162,7 @@ function App() {
         <Problem                   
             body={TodayProblem.body}
             author={TodayProblem.author}
-            image=""
+            image={TodayProblem.image_url}
         />
         <form>
           <div className="mb-4">
