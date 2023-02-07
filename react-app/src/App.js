@@ -22,8 +22,8 @@ function Problem({ title, body, author, image }) {
     if (image != "girl.png")
         return (
             <div>
-                <img src="{image}"></img>
-                <p className="text-lg mb-4">{body}</p>                
+                <img src={image} />
+                <p className="text-lg mb-4">{body}</p>
             </div>
         );
     else
