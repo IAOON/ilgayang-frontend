@@ -17,7 +17,6 @@ const State = {
   "힌트1봤음": 2,
   "힌트2봤음": 3  
 };
-
 const verifiedState = {
     "정답못맞춤": 0,
     "정답맞춤": 1
