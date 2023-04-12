@@ -8,7 +8,8 @@ import ReactGA from "react-ga4";
 const BACKEND_URL = 'https://cloudflare-worker-d1.zetbouaka9758.workers.dev/api/problem';
 
 const supabaseUrl = 'https://wrvwoxshrroapcqjczdv.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndydndveHNocnJvYXBjcWpjemR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODEyOTY2ODksImV4cCI6MTk5Njg3MjY4OX0.fyWNFXkIHHJUIx9pudlqcQpae1Kiu4d5Ogdk1yIYM0w'
+
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 const State = {
