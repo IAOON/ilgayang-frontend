@@ -1,10 +1,15 @@
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { createClient } from '@supabase/supabase-js'
 
 import ReactGA from "react-ga4";
 
 const BACKEND_URL = 'https://cloudflare-worker-d1.zetbouaka9758.workers.dev/api/problem';
+
+const supabaseUrl = 'https://wrvwoxshrroapcqjczdv.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 const State = {
   "문제로딩중": 0,
@@ -42,7 +47,7 @@ function getTodayString(){
     var month = ("0" + (1 + date.getMonth())).slice(-2);
     var day = ("0" + date.getDate()).slice(-2);
 
-    return year + month + day;
+    return year + "-" + month + "-" + day;
 }
 
 function App() {
@@ -54,16 +59,20 @@ function App() {
     
     useEffect(() => {
         async function fetchAndSetProblem() {
-            URL = BACKEND_URL + "/" + getTodayString();
-            const result = await axios.get(URL);
+            const { data, error } = await supabase
+            .from('problem')
+            .select('title, body, answer')
+            .eq('date', getTodayString())
+            .single();
+
             setTodayProblem({
-                title: result.data[0].title,
-                body: result.data[0].body,
-                author: result.data[0].author,
-                answer: result.data[0].answer,
-                hint1: result.data[0].hint1,
-                hint2: result.data[0].hint2,
-                image_url: result.data[0].image
+                title: data.title,
+                body: data.body,
+                author: data.author || "아카",
+                answer: data.answer,
+                hint1: data.hint1 || "힌트 1 없음",
+                hint2: data.hint2 || "힌트 2 없음",
+                image_url: data.image || ""
             })
             // setAnswer();
             setuserState(State.문제푸는중);
